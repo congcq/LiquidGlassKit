@@ -19,7 +19,7 @@ for metal_file in ${SOURCES_DIR}/*.metal; do
         echo " - Compiling $filename.metal..."
         xcrun -sdk ${SDK_PATH} metal \
             -c \
-            -target air64-apple-ios \
+            -target air64-apple-ios13 \
             -ffast-math \
             "$metal_file" \
             -o "${BUILD_DIR}/shaders/$filename.air"
@@ -64,7 +64,7 @@ echo "🔨 Compiling Swift framework..."
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Headers"
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules"
 
-TARGET="arm64-apple-ios"
+TARGET="arm64-apple-ios13"
 
 xcrun -sdk "${SDK_PATH}" swiftc -emit-library \
     -target "${TARGET}" \
