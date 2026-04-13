@@ -12,15 +12,21 @@ mkdir -p "${BUILD_DIR}"
 echo "🔨 Compiling Metal shaders..."
 mkdir -p "${BUILD_DIR}/shaders"
 
-xcrun -sdk iphoneos metal \
-    -c \
-    -target air64-apple-ios13.0 \
-    -ffast-math \
-    "${SOURCES_DIR}"/*.metal \
-    -o "${BUILD_DIR}/shaders/shaders.air"
+for metal_file in ${SOURCES_DIR}/*.metal; do
+    if [ -f "$metal_file" ]; then
+        filename = $(basename "$metal_file" .metal)
+        echo " - Compiling $filename.metal..."
+        xcrun -sdk iphoneos metal \
+            -c \
+            -target air64-apple-ios13.0 \
+            -ffast-math \
+            "$metal_file" \
+            -o "${BUILD_DIR}/shaders/$filename.air"
+    fi
+done
 
 xcrun -sdk iphoneos metallib \
-    "${BUILD_DIR}/shaders/shaders.air" \
+    "${BUILD_DIR}/shaders/*.air" \
     -o "${BUILD_DIR}/default.metallib"
 
 
