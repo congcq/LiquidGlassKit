@@ -27,7 +27,7 @@ for metal_file in ${SOURCES_DIR}/*.metal; do
 done
 
 xcrun -sdk iphoneos metallib \
-    "${BUILD_DIR}/shaders/*.air" \
+    ${BUILD_DIR}/shaders/*.air \
     -o "${BUILD_DIR}/default.metallib"
 
 
@@ -64,7 +64,7 @@ echo "🔨 Compiling Swift framework..."
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Headers"
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules"
 
-TARGET="arm64-apple-ios13.0"
+TARGET="arm64-apple-ios26.0"
 
 swiftc -emit-library \
     -sdk "${SDK_PATH}" \
