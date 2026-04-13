@@ -90,4 +90,6 @@ echo "📦 Framework: ${BUILD_DIR}/${FRAMEWORK_NAME}.framework"
 echo "📦 Resources: ${BUILD_DIR}/${RESOURCES_BUNDLE_NAME}.bundle"
 
 echo "Creating tbd file..."
+mkdir -p ${BUILD_DIR}/tbd
 xcrun tapi stubify ${BUILD_DIR}/${FRAMEWORK_NAME}.framework/LiquidGlassKit -o ${BUILD_DIR}/tbd/LiquidGlassKit.tbd
+echo "Created tbd file"
