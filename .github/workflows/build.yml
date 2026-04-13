@@ -1,0 +1,20 @@
+name: build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build artifacts
+        run: bash build.sh
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@main
+        with:
+          name: artifacts
+          path: build/*
