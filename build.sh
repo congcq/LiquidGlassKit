@@ -14,7 +14,7 @@ mkdir -p "${BUILD_DIR}/shaders"
 
 for metal_file in ${SOURCES_DIR}/*.metal; do
     if [ -f "$metal_file" ]; then
-        filename = $(basename "$metal_file" .metal)
+        filename=$(basename "$metal_file" .metal)
         echo " - Compiling $filename.metal..."
         xcrun -sdk iphoneos metal \
             -c \
