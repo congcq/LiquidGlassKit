@@ -66,8 +66,7 @@ mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules"
 
 TARGET="arm64-apple-ios26.0"
 
-swiftc -emit-library \
-    -sdk "${SDK_PATH}" \
+xcrun -sdk "${SDK_PATH}" swiftc -emit-library \
     -target "${TARGET}" \
     -module-name "${FRAMEWORK_NAME}" \
     -emit-module \
