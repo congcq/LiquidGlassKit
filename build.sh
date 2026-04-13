@@ -4,6 +4,7 @@ FRAMEWORK_NAME="LiquidGlassKit"
 SOURCES_DIR="./Sources/${FRAMEWORK_NAME}"
 BUILD_DIR="./build"
 RESOURCES_BUNDLE_NAME="${FRAMEWORK_NAME}ShaderResources"
+SDK_PATH=$(xcrun --show-sdk-path --sdk iphoneos)
 
 rm -rf "${BUILD_DIR}"
 mkdir -p "${BUILD_DIR}"
@@ -16,7 +17,7 @@ for metal_file in ${SOURCES_DIR}/*.metal; do
     if [ -f "$metal_file" ]; then
         filename=$(basename "$metal_file" .metal)
         echo " - Compiling $filename.metal..."
-        xcrun -sdk iphoneos metal \
+        xcrun -sdk ${SDK_PATH} metal \
             -c \
             -target air64-apple-ios13.0 \
             -ffast-math \
@@ -63,7 +64,6 @@ echo "🔨 Compiling Swift framework..."
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Headers"
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules"
 
-SDK_PATH=$(xcrun --show-sdk-path --sdk iphoneos)
 TARGET="arm64-apple-ios13.0"
 
 swiftc -emit-library \
@@ -83,7 +83,7 @@ swiftc -emit-library \
 
 mkdir -p "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule"
 cp -R "${BUILD_DIR}/${FRAMEWORK_NAME}.swiftmodule/"* "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/"
-cp -R "Info.plist" "${BUILD_DIR}/{FRAMEWORK_NAME}.framework/Info.plist"
+cp -R "Info.plist" "${BUILD_DIR}/${FRAMEWORK_NAME}.framework/"
 
 
 echo "✅ Build complete!"
