@@ -10,6 +10,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@master
+        with:
+          xcode-version: '26.1'
+
       - name: build artifacts
         run: bash build.sh
 
