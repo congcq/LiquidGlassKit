@@ -10,12 +10,12 @@ internal import MetalKit
 
 /// A custom switch control that replicates the iOS 26 Liquid Glass sliding style.
 /// Fully compatible with UISwitch interface for drop-in replacement.
-open class LiquidGlassSwitch: UIControl {
+@objc open class LiquidGlassSwitch: UIControl {
 
     // MARK: - Public Properties (UISwitch Interface)
     
     /// A Boolean value that determines the off/on state of the switch.
-    open var isOn: Bool = false {
+    @objc open var isOn: Bool = false {
         didSet {
             guard oldValue != isOn else { return }
             
@@ -29,32 +29,32 @@ open class LiquidGlassSwitch: UIControl {
     }
     
     /// The color used to tint the appearance of the switch when it's in the on position.
-    open var onTintColor: UIColor? {
+    @objc open var onTintColor: UIColor? {
         didSet { updateTrackColor(animated: false) }
     }
     
     /// The color used to tint the appearance of the thumb.
-    open var thumbTintColor: UIColor? {
+    @objc open var thumbTintColor: UIColor? {
         didSet { updateThumbAppearance() }
     }
     
     /// The image displayed when the switch is in the on position (not used in iOS 26 style, kept for compatibility).
-    open var onImage: UIImage? {
+    @objc open var onImage: UIImage? {
         didSet { /* No-op for iOS 26 style */ }
     }
     
     /// The image displayed when the switch is in the off position (not used in iOS 26 style, kept for compatibility).
-    open var offImage: UIImage? {
+    @objc open var offImage: UIImage? {
         didSet { /* No-op for iOS 26 style */ }
     }
 
     @available(iOS 14.0, *)
-    open var style: UISwitch.Style {
+    @objc open var style: UISwitch.Style {
         .sliding
     }
 
     @available(iOS 14.0, *)
-    open var preferredStyle: UISwitch.Style {
+    @objc open var preferredStyle: UISwitch.Style {
         get { .sliding }
         set { }
     }
@@ -263,7 +263,7 @@ open class LiquidGlassSwitch: UIControl {
     
     /// Set the state of the switch to On or Off, optionally animating the transition.
     /// Note: Programmatic changes do not expand the thumb, only user interactions do.
-    open func setOn(_ on: Bool, animated: Bool) {
+    @objc open func setOn(_ on: Bool, animated: Bool) {
         guard isOn != on else { return }
         
         isUpdatingStateProgrammatically = true
@@ -574,7 +574,7 @@ open class LiquidGlassSwitch: UIControl {
     }
 }
 
-public protocol AnySwitch: UIControl {
+@objc public protocol AnySwitch: UIControl {
     var onTintColor: UIColor? { get set }
     var thumbTintColor: UIColor? { get set }
     var onImage: UIImage? { get set }
