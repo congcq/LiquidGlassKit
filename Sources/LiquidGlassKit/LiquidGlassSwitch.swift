@@ -574,7 +574,7 @@ internal import MetalKit
     }
 }
 
-@objc public protocol AnySwitch: UIControl {
+public protocol AnySwitch: UIControl {
     var onTintColor: UIColor? { get set }
     var thumbTintColor: UIColor? { get set }
     var onImage: UIImage? { get set }
